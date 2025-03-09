@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote - Highlands Investment Limited</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Full Page Background with Image Change */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: url('images/get-quote-bg1.jpg') no-repeat center center/cover;
+            transition: background 1s ease-in-out;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: black;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .company-name {
+            margin-left: 10px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Form Container */
+        .container {
+            margin-top: 80px; /* Adjusted for fixed header */
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: white;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        button {
+            background: #004d99;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #003366;
+        }
+
+        /* Moving Vehicles - Fixed to Bottom */
+        .moving-vehicles {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .digger, .truck {
+            position: absolute;
+            width: 120px;
+            bottom: 10px;
+        }
+
+        .digger {
+            left: -150px;
+            animation: moveVehicles 10s linear infinite;
+        }
+
+        .truck {
+            left: -200px;  /* Moved 50px behind the digger */
+            animation: moveVehicles 10s linear infinite;
+            transform: scaleX(-1); /* Flip truck */
+        }
+
+        /* Both Vehicles Move Together */
+        @keyframes moveVehicles {
+            0% { left: -200px; }
+            100% { left: 110%; }
+        }
+
+    </style>
+    <script>
+        // Background Image Loop
+        let images = [
+            'images/get-quote-bg1.jpg',
+            'images/get-quote-bg2.jpg',
+            'images/get-quote-bg3.jpg'
+        ];
+        let index = 0;
+
+        function changeBackground() {
+            document.body.style.backgroundImage = `url(${images[index]})`;
+            index = (index + 1) % images.length;
+        }
+
+        setInterval(changeBackground, 5000); // Change every 5 seconds
+    </script>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="images/company-logo.jpg" alt="Company Logo" class="logo" onclick="window.location.href='index.html';">
+        <div class="company-name">Highlands Investment Limited</div>
+    </div>
+
+    <!-- Form Section -->
+    <section class="container">
+        <h2 style="color: white;">Get a Quote</h2>
+        <form action="send_mail.php" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="from_location">From Location:</label>
+            <input type="text" id="from_location" name="from_location" required>
+            
+            <label for="to_location">To Location:</label>
+            <input type="text" id="to_location" name="to_location" required>
+            
+            <label for="equipment">Select Equipment:</label>
+            <select id="equipment" name="equipment" required>
+                <option value="Cranes">Cranes (18 Ton to 400 Ton)</option>
+                <option value="Dump Trucks">Dump Trucks</option>
+                <option value="Dozers">Dozers</option>
+                <option value="Excavators">Excavators</option>
+                <option value="Front-End Loaders">Front-End Loaders</option>
+                <option value="Graders">Graders</option>
+                <option value="Forklifts">Forklifts (3.5 Ton to 10 Ton)</option>
+                <option value="Flatbed Trucks">Flatbed Trucks</option>
+                <option value="Bowsers">Bowsers</option>
+                <option value="Tipper Trucks">Tipper Trucks</option>
+                <option value="Low Bed Trailers">Low Bed Trailers</option>
+                <option value="Dolly Trailers">Dolly Trailers</option>
+                <option value="Compactors">Compactors</option>
+            </select>
+            
+            <label for="rental_duration">Rental Duration:</label>
+            <input type="text" id="rental_duration" name="rental_duration" placeholder="e.g., 2 weeks" required>
+            
+            <label for="additional_requirements">Additional Requirements:</label>
+            <textarea id="additional_requirements" name="additional_requirements" placeholder="Any extra details..."></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Moving Vehicles Animation -->
+    <div class="moving-vehicles">
+        <img src="images/digger.png" alt="Digger" class="digger">
+        <img src="images/cranes.png" alt="Truck" class="truck">
+    </div>
+</body>
+</html>
